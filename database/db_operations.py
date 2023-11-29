@@ -12,11 +12,11 @@ def add_user(first_name, last_name, email, hashed_password,salt):
     conn.commit()
     conn.close()
 
-def get_user_by_email():
+def get_user_by_email(email):
     conn = sqlite3.connect('user_database.db')
     cursor = conn.cursor()
     
-    cursor.execute('SELECT * FROM users WHERE EMAIL =?', (email,))
+    cursor.execute('SELECT * FROM users WHERE EMAIL = ?', (email,))
     user_data = cursor.fetchone()
     
     conn.close()
