@@ -1,11 +1,11 @@
 from database import db_operations
 from encryption import password_hashing
 
-def register_user(first_name, last_name, email, hashed_password, salt):
-    db_operations.add_user(first_name, last_name, email, hashed_password, salt)
+def register_user(username, hashed_password, salt):
+    db_operations.add_user(username, hashed_password, salt)
     
 def login_user(email,password):
-    user_data = db_operations.get_user_by_email(email)
+    user_data = db_operations.get_user_by_username(email)
     
     if user_data:
         hashed_password = user_data[4]
