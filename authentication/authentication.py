@@ -2,6 +2,10 @@ from database import db_operations
 from encryption import password_hashing
 
 def register_user(username, hashed_password, salt):
+    salt = password_hashing.generate_salt()
+    
+    hashed_password = password_hashing.hash_password()
+    
     db_operations.add_user(username, hashed_password, salt)
     
 def login_user(username,password):

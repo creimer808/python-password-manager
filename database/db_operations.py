@@ -1,9 +1,22 @@
 import sqlite3
 
+def create_user(username, password, salt):
+    conn = sqlite3.connect('secrets.db')
+    cursor = conn.cursor()
+    
+    cursor.execute(''''
+                   INSERT INTO users (username, password, salt)
+                   VALUES (?, ?)
+                   ''', (username, password, salt))
+    
+    conn.commit()
+    conn.close()
+
+
 ###########################################################
 ##### Stuff to do with password database modification #####
 ###########################################################
-def add_secrets_entry(user_email, title, username, password, notes):
+def add_secrets_entry(title, username, password, notes):
     conn = sqlite3.connect('secrets.db')
     cursor = conn.cursor()
 

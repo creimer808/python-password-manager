@@ -1,7 +1,6 @@
 # main.py
 from authentication import authentication
 from secrets import secrets_operations
-import create_user_script  # Import your create_user_script module
 
 def main():
     print("Welcome to the Secrets Manager!")
@@ -15,7 +14,9 @@ def main():
         choice = input("Enter your choice: ")
 
         if choice == '1':
-            user_id = authentication.login_user()
+            login_username = input("Enter Username: ")
+            login_password = input("Enter Password: ")
+            user_id = authentication.login_user(login_username, login_password)
 
             if user_id is not None:
                 while True:
@@ -60,8 +61,10 @@ def main():
                 print("Login failed. Please try again.\n")
 
         elif choice == '2':
-            create_user_script.main()  # Call the create_user_script directly from the main menu
-            print("User created successfully!\n")
+            new_username = input("Enter Your Username: ")
+            new_password = input("Enter Your Password: ")
+            authentication.register_user(new_username, new_password)
+            print("User created successfully! Please Login.\n")
 
         elif choice == '3':
             print("Exiting Secrets Manager. Goodbye!")
