@@ -6,3 +6,10 @@ class User:
         self.hashed_password = hashed_password
         self.salt = salt
         
+class PasswordEntry:
+    def __init__(self,user_email,title,username,password,notes):
+        self.user_email = user_email
+        self.title = title
+        self.username = username
+        self.password = password
+        self.notes = notes
