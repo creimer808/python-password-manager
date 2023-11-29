@@ -4,8 +4,8 @@ from encryption import password_hashing
 def register_user(username, hashed_password, salt):
     db_operations.add_user(username, hashed_password, salt)
     
-def login_user(email,password):
-    user_data = db_operations.get_user_by_username(email)
+def login_user(username,password):
+    user_data = db_operations.get_user_by_username(username)
     
     if user_data:
         hashed_password = user_data[4]
@@ -20,4 +20,6 @@ def login_user(email,password):
         
     else:
         print("User not found")
+
+
     

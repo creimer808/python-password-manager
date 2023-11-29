@@ -26,6 +26,12 @@ def get_secrets_entries_for_user(user_id):
 
     return password_entries
 
+def get_user_by_username(username):
+    conn = sqlite3.connect('secrets.db')
+    cursor = conn.cursor()
+
+    cursor.execute()
+
 ### add an update password entry
 
     
