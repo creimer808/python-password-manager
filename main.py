@@ -18,7 +18,7 @@ def main():
             login_password = input("Enter Password: ")
             user_id = authentication.login_user(login_username, login_password)
 
-            if user_id is not None:
+            if user_id is not 0:
                 while True:
                     print("Menu:")
                     print("1. List All Secrets")

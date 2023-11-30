@@ -1,16 +1,32 @@
 import sqlite3
 
+###########################################################
+####################### User Data  ########################
+###########################################################
 def create_user(username, password, salt):
     conn = sqlite3.connect('secrets.db')
     cursor = conn.cursor()
     
-    cursor.execute(''''
+    cursor.execute('''
                    INSERT INTO users (username, password, salt)
                    VALUES (?, ?)
                    ''', (username, password, salt))
     
     conn.commit()
     conn.close()
+    
+def login_user(username, password):
+    conn = sqlite3.connect('secrets.db')
+    cursor = conn.cursor()
+    
+    cursor.execute(''' 
+                    SELECT from users WHERE username = ?
+                    ''', (username))
+    
+    conn.commit()
+    conn.close()
+    
+    
 
 
 ###########################################################
@@ -39,11 +55,6 @@ def get_secrets_entries_for_user(user_id):
 
     return password_entries
 
-def get_user_by_username(username):
-    conn = sqlite3.connect('secrets.db')
-    cursor = conn.cursor()
-
-    cursor.execute()
 
 ### add an update password entry
 
