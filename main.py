@@ -1,6 +1,6 @@
 # main.py
 from authentication import authentication
-from secrets import secrets_operations
+#from secrets import secrets_operations
 
 def main():
     print("Welcome to the Secrets Manager!")
@@ -18,7 +18,7 @@ def main():
             login_password = input("Enter Password: ")
             user_id = authentication.login_user(login_username, login_password)
 
-            if user_id is not 0:
+            if user_id != 0:
                 while True:
                     print("Menu:")
                     print("1. List All Secrets")
@@ -37,7 +37,7 @@ def main():
 
                     elif choice == '2':
                         secret_id = input("Enter the ID of the secret you want to open: ")
-                        secret = secrets_operations.open_secret(secret_id)
+                        #secret = secrets_operations.open_secret(secret_id)
                         if secret:
                             print(f"\nSecret Details:")
                             print(f"Username: {secret[2]}, Password: {secret[3]}, Notes: {secret[4]}\n")
@@ -48,7 +48,7 @@ def main():
                         username = input("Enter the username: ")
                         password = input("Enter the password: ")
                         notes = input("Enter any notes: ")
-                        secrets_operations.add_secret(user_id, username, password, notes)
+                        #secrets_operations.add_secret(user_id, username, password, notes)
                         print("Secret added successfully!\n")
 
                     elif choice == '4':
@@ -63,8 +63,14 @@ def main():
         elif choice == '2':
             new_username = input("Enter Your Username: ")
             new_password = input("Enter Your Password: ")
-            authentication.register_user(new_username, new_password)
-            print("User created successfully! Please Login.\n")
+            confirmation = authentication.register_user(new_username, new_password)
+            if confirmation == 0:
+                print("Username already taken")
+            elif confirmation == 1:
+                print("User created successfully! Please Login.\n")
+            else:
+                print("Error... Exiting")
+                break
 
         elif choice == '3':
             print("Exiting Secrets Manager. Goodbye!")

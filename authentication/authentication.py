@@ -1,12 +1,14 @@
 from database import db_operations
 from encryption import password_hashing
 
-def register_user(username, hashed_password, salt):
+def register_user(username, hashed_password):
+    
     salt = password_hashing.generate_salt()
     
     hashed_password = password_hashing.hash_password()
     
-    db_operations.add_user(username, hashed_password, salt)
+    confirmation = db_operations.create_user(username, hashed_password, salt)
+    return confirmation
     
 def login_user(username,password):
     user_data = db_operations.login_user(username)
@@ -28,4 +30,5 @@ def login_user(username,password):
         print("User not found")
 
 
+    
     

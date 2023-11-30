@@ -7,13 +7,20 @@ def create_user(username, password, salt):
     conn = sqlite3.connect('secrets.db')
     cursor = conn.cursor()
     
-    cursor.execute('''
-                   INSERT INTO users (username, password, salt)
-                   VALUES (?, ?)
-                   ''', (username, password, salt))
+    cursor.execute('Select * FROM users WHERE username = ?', (username,)) 
+    existing_user = cursor.fetchone()
+    
+    if existing_user:
+        return(0)
+    else:
+        cursor.execute('''
+                    INSERT INTO users (username, password, salt)
+                    VALUES (?, ?)
+                    ''', (username, password, salt))
     
     conn.commit()
     conn.close()
+    return(1)
     
 def login_user(username, password):
     conn = sqlite3.connect('secrets.db')
