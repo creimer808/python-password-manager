@@ -1,11 +1,11 @@
 from database import db_operations
 from encryption import password_hashing
 
-def register_user(username, hashed_password):
+def register_user(username, password):
     
     salt = password_hashing.generate_salt()
     
-    hashed_password = password_hashing.hash_password()
+    hashed_password = password_hashing.hash_password(salt, password)
     
     confirmation = db_operations.create_user(username, hashed_password, salt)
     return confirmation

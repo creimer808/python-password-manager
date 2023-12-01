@@ -17,10 +17,13 @@ def create_user(username, password, salt):
                     INSERT INTO users (username, password, salt)
                     VALUES (?, ?)
                     ''', (username, password, salt))
+        conn.commit()
+        conn.close()
+        return(1)
     
     conn.commit()
     conn.close()
-    return(1)
+
     
 def login_user(username, password):
     conn = sqlite3.connect('secrets.db')
