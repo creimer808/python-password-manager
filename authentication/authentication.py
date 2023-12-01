@@ -6,8 +6,11 @@ def register_user(username, password):
     salt = password_hashing.generate_salt()
     
     hashed_password = password_hashing.hash_password(salt, password)
-    
+    print(salt)
+    print(username)
+    print(hashed_password)
     confirmation = db_operations.create_user(username, hashed_password, salt)
+    
     return confirmation
     
 def login_user(username,password):

@@ -17,7 +17,9 @@ def main():
             login_username = input("Enter Username: ")
             login_password = input("Enter Password: ")
             user_id = authentication.login_user(login_username, login_password)
-
+##################################################################
+############# Post Secret Menu ###################################
+##################################################################
             if user_id != 0:
                 while True:
                     print("Menu:")
@@ -59,7 +61,9 @@ def main():
                         print("Invalid choice. Please enter a valid option.\n")
             else:
                 print("Login failed. Please try again.\n")
-
+###########################################
+########## create user ####################
+###########################################
         elif choice == '2':
             new_username = input("Enter Your Username: ")
             new_password = input("Enter Your Password: ")

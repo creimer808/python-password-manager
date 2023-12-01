@@ -3,7 +3,7 @@ import sqlite3
 ###########################################################
 ####################### User Data  ########################
 ###########################################################
-def create_user(username, password, salt):
+def create_user(username, hashed_password, salt):
     conn = sqlite3.connect('secrets.db')
     cursor = conn.cursor()
     
@@ -14,9 +14,9 @@ def create_user(username, password, salt):
         return(0)
     else:
         cursor.execute('''
-                    INSERT INTO users (username, password, salt)
-                    VALUES (?, ?)
-                    ''', (username, password, salt))
+                    INSERT INTO users (username, hashed_password, salt)
+                    VALUES (?, ?, ?)
+                    ''', (username, hashed_password, salt))
         conn.commit()
         conn.close()
         return(1)
