@@ -25,13 +25,15 @@ def create_user(username, hashed_password, salt):
     conn.close()
 
     
-def login_user(username, password):
+def login_user(username):
     conn = sqlite3.connect('secrets.db')
     cursor = conn.cursor()
     
     cursor.execute(''' 
-                    SELECT from users WHERE username = ?
+                    SELECT username, hashed_password, salt FROM users WHERE username = ?
                     ''', (username))
+    
+    data = cursor.fetchone()
     
     conn.commit()
     conn.close()

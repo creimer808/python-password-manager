@@ -24,7 +24,7 @@ def list_columns():
     columns = cursor.fetchall()
 
     for i in columns:
-        print(columns[1])
+        print(i[1])
 
     conn.commit()
     conn.close()
